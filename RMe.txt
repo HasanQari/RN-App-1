@@ -14,3 +14,27 @@ React Native App ..............
     <View> has flexDirection: 'column' (which is the default) 
 - will add a style as a dynamic way {for style{for code from Js}} -> <View style={{}}>
 - activeOpscity is attribute that show motion effect when click on button it come with <Touchable> Tag
+
+
+- What to Debug?
+    3 type of debug/error: 
+        1- error messages or app crashes --> red box show that is you error 
+            @ syntax error / missing code or value
+            @ bug in code --ex. use undefined value wroung types ...
+            @ unavidable error *must fase it* --ex. network request error / missing filesystem / blocked permition
+        2- logical error --> work but it doesn't work fine (working incorrect) output but the app is work 
+            @ undesired or unexpected app behavior
+            @ unhandled user behavior --> user use app in way didn't intend
+            @ may user follow sequence of step that leads to errors
+        3- UI and UX error --> somethings doesn't look fine 
+            @ unexpected errors *wrong in style code* or layout
+            @ inconsistent result on different devices *responsivity of app*
+            @ work fine on Android but not on IOS --ex.
+- how to debug?
+    @ read errors messages *most people don't read it!* --> error message sometime contain the solution or part of it 
+    @ googling about error messages
+    @ feel about value, var. and use console.log to check about a value *efficants with simple code not for complex code*
+    @ for very hard and copmlex error use *Chrome Debugger(+ Breakpoints / DevTool)* tool it supported with RN 
+        the tool dive into the code in details and step by step.
+    @ with expo debugger on real device with shake the device a little
+

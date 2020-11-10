@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Button } from 'react-native';
+import { StyleSheet, View, TextInput, Button, Modal } from 'react-native';
 
 const ListInput = props => {
     const [enteredItem, setEnteredItem] = useState('');
@@ -8,22 +8,35 @@ const ListInput = props => {
         setEnteredItem(enteredText);
     }
 
+    const AddItemHandler = () => {
+        props.onAddItem(enteredItem);
+        setEnteredItem('');
+
+    }
+
     return (
-        <View style={styles.formView}>
-            <TextInput
-                style={styles.inputField}
-                placeholder="Write Shopping Items Here !"
-                onChangeText={ItemInputHandler}
-                value={enteredItem} />
-            <Button title="Add Item" onPress={props.onAddItem.bind(this, enteredItem)} />
-        </View>
+        <Modal visible={props.onVisible} animationType="slide">
+            <View style={styles.formView}>
+                <TextInput
+                    style={styles.inputField}
+                    placeholder="Write Shopping Items Here !"
+                    onChangeText={ItemInputHandler}
+                    value={enteredItem} />
+                <View style={styles.btnInRow}>
+                    <View style={styles.Button}><Button title="Add" onPress={AddItemHandler} color='green' /></View>
+                    <View style={styles.Button}><Button title="Cancel" onPress={props.cancelAddItem} color='red' /></View>
+                </View>
+            </View>
+        </Modal>
     );
 }
 
 const styles = StyleSheet.create({
     formView: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        // flexDirection: 'row',
+        flex: 1,
+        // justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     inputField: {
@@ -33,6 +46,15 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         padding: 10
     },
+    btnInRow:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '60%'
+    },
+    Button:{
+        width:'40%'
+    }
+
 });
 
 export default ListInput;

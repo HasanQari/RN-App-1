@@ -8,12 +8,14 @@ import ListInput from './components/ListInput';
 export default function App() {
 
   const [shoppingList, setShoppingList] = useState([]);
+  const [isAddModal, setIsAddModal] = useState(false);
 
   const addItemHandler = itemValue => {
     setShoppingList(SList => [
       ...SList,
       { key: parseInt(Math.random() * 100).toString(), value: itemValue }
     ]);
+    setIsAddModal(false);
   };
 
   const removeItemHandler = itemID => {
@@ -22,12 +24,15 @@ export default function App() {
     });
   }
 
+  const cancelItamAdditionHandler = () => {
+    setIsAddModal(false);
+  }
+
   return (
     <View style={styles.rootView}>
       <Text style={styles.headerTitle}>Shopping List</Text>
-
-      <ListInput onAddItem={addItemHandler} />
-
+      <Button title="Add New Item to List" onPress={() => setIsAddModal(true)} />
+      <ListInput onAddItem={addItemHandler} onVisible={isAddModal} cancelAddItem={cancelItamAdditionHandler} />
       <FlatList data={shoppingList}
         renderItem={itemData =>
           <ListItem value={itemData.item.value} id={itemData.item.key} onDelete={removeItemHandler} />
